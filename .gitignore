@@ -33,6 +33,7 @@ env/
 *.log
 *.tmp
 *.bak
+.release_uploads/
 Thumbs.db
 desktop.ini
 *.lnk

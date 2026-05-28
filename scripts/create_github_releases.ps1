@@ -2,6 +2,7 @@ $ErrorActionPreference = "Stop"
 
 $Repo = "suyuwithoutPainkillers/ChatScreenExporter"
 $Root = Split-Path -Parent $PSScriptRoot
+$UploadDir = Join-Path $Root ".release_uploads"
 
 if (-not $env:GH_TOKEN) {
     $oldErrorActionPreference = $ErrorActionPreference
@@ -47,8 +48,10 @@ foreach ($release in $releases) {
         exit 1
     }
 
-    $assetPath = $matches[0].FullName
-    $assetName = $matches[0].Name
+    New-Item -ItemType Directory -Force -Path $UploadDir | Out-Null
+    $assetName = "ChatScreenExporter-$($release.Tag).exe"
+    $assetPath = Join-Path $UploadDir $assetName
+    Copy-Item -LiteralPath $matches[0].FullName -Destination $assetPath -Force
 
     $oldErrorActionPreference = $ErrorActionPreference
     $ErrorActionPreference = "SilentlyContinue"
@@ -86,6 +89,10 @@ Asset: $assetName
     }
     $args += $assetPath
     & gh @args
+}
+
+if (Test-Path -LiteralPath $UploadDir) {
+    Remove-Item -LiteralPath $UploadDir -Recurse -Force
 }
 
 Write-Host "All requested releases have been processed." -ForegroundColor Green
