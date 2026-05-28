@@ -3,15 +3,17 @@ $ErrorActionPreference = "Stop"
 $Repo = "suyuwithoutPainkillers/ChatScreenExporter"
 $Root = Split-Path -Parent $PSScriptRoot
 
-$oldErrorActionPreference = $ErrorActionPreference
-$ErrorActionPreference = "SilentlyContinue"
-$authStatus = gh auth status 2>&1
-$authExitCode = $LASTEXITCODE
-$ErrorActionPreference = $oldErrorActionPreference
-if ($authExitCode -ne 0) {
-    Write-Host "GitHub CLI has not logged in yet. Run: gh auth login" -ForegroundColor Yellow
-    Write-Host $authStatus
-    exit 1
+if (-not $env:GH_TOKEN) {
+    $oldErrorActionPreference = $ErrorActionPreference
+    $ErrorActionPreference = "SilentlyContinue"
+    $authStatus = gh auth status 2>&1
+    $authExitCode = $LASTEXITCODE
+    $ErrorActionPreference = $oldErrorActionPreference
+    if ($authExitCode -ne 0) {
+        Write-Host "GitHub CLI has not logged in yet. Run: gh auth login" -ForegroundColor Yellow
+        Write-Host $authStatus
+        exit 1
+    }
 }
 
 $releases = @(
