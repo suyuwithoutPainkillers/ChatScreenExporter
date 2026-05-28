@@ -50,12 +50,18 @@ foreach ($release in $releases) {
 
     $oldErrorActionPreference = $ErrorActionPreference
     $ErrorActionPreference = "SilentlyContinue"
-    gh release view $release.Tag --repo $Repo *> $null
+    $releaseJson = gh release view $release.Tag --repo $Repo --json isDraft 2>$null
     $viewExitCode = $LASTEXITCODE
     $ErrorActionPreference = $oldErrorActionPreference
     if ($viewExitCode -eq 0) {
-        Write-Host "Skip existing release $($release.Tag)" -ForegroundColor DarkYellow
-        continue
+        $existingRelease = $releaseJson | ConvertFrom-Json
+        if ($existingRelease.isDraft) {
+            Write-Host "Delete incomplete draft release $($release.Tag)" -ForegroundColor DarkYellow
+            gh release delete $release.Tag --repo $Repo --cleanup-tag --yes
+        } else {
+            Write-Host "Skip existing release $($release.Tag)" -ForegroundColor DarkYellow
+            continue
+        }
     }
 
     Write-Host "Creating release $($release.Tag) -> $assetName" -ForegroundColor Cyan
