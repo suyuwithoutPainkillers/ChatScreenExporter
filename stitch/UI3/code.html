@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ChatScreenExporter V2.1</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "on-tertiary": "#ffffff",
+                "surface-container": "#edeef0",
+                "tertiary-fixed": "#ffdcbf",
+                "on-secondary-fixed": "#121c28",
+                "surface-container-lowest": "#ffffff",
+                "inverse-primary": "#6cd3f7",
+                "outline-variant": "#bdc8ce",
+                "on-tertiary-container": "#fffbff",
+                "inverse-surface": "#2e3132",
+                "tertiary-container": "#a86516",
+                "on-tertiary-fixed-variant": "#6a3b00",
+                "secondary-container": "#d6e0f1",
+                "error-container": "#ffdad6",
+                "surface-bright": "#f8f9fb",
+                "surface-dim": "#d9dadc",
+                "on-primary-fixed-variant": "#004e61",
+                "surface-container-high": "#e7e8ea",
+                "inverse-on-surface": "#f0f1f3",
+                "primary": "#00647c",
+                "secondary": "#555f6d",
+                "on-background": "#191c1e",
+                "surface-container-highest": "#e1e2e4",
+                "surface-container-low": "#f3f4f6",
+                "tertiary-fixed-dim": "#ffb873",
+                "outline": "#6e797e",
+                "on-secondary-fixed-variant": "#3e4755",
+                "surface": "#f8f9fb",
+                "on-surface-variant": "#3e484d",
+                "secondary-fixed-dim": "#bdc7d8",
+                "surface-variant": "#e1e2e4",
+                "on-secondary-container": "#596372",
+                "surface-tint": "#006780",
+                "on-surface": "#191c1e",
+                "tertiary": "#894e00",
+                "on-primary-fixed": "#001f28",
+                "on-error-container": "#93000a",
+                "on-primary": "#ffffff",
+                "primary-container": "#007f9d",
+                "on-tertiary-fixed": "#2d1600",
+                "background": "#f8f9fb",
+                "primary-fixed-dim": "#6cd3f7",
+                "on-secondary": "#ffffff",
+                "on-primary-container": "#fafdff",
+                "primary-fixed": "#b7eaff",
+                "on-error": "#ffffff",
+                "secondary-fixed": "#d9e3f4",
+                "error": "#ba1a1a"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "xs": "4px",
+                "margin-page": "24px",
+                "base": "4px",
+                "gutter": "12px",
+                "sm": "8px",
+                "lg": "24px",
+                "xl": "32px",
+                "md": "16px"
+            },
+            "fontFamily": {
+                "label-md": ["Inter"],
+                "code": ["JetBrains Mono"],
+                "h2": ["Inter"],
+                "h3": ["Inter"],
+                "label-sm": ["Inter"],
+                "h1": ["Inter"],
+                "body-sm": ["Inter"],
+                "body-md": ["Inter"]
+            },
+            "fontSize": {
+                "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                "code": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                "h2": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                "h3": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                "label-sm": ["11px", {"lineHeight": "14px", "letterSpacing": "0.03em", "fontWeight": "500"}],
+                "h1": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #F3F4F6;
+            -webkit-font-smoothing: antialiased;
+            user-select: none;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a1a1a1;
+        }
+        .windows-shadow {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .input-focus-teal:focus {
+            outline: none;
+            border-color: #00647c;
+            box-shadow: inset 0 0 0 1px #00647c;
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface overflow-hidden flex flex-col h-screen">
+<!-- Top Navigation Anchor (TopAppBar) -->
+<header class="bg-surface-container-low dark:bg-surface-container-lowest border-b border-outline-variant flex justify-between items-center h-8 px-md w-full select-none">
+<div class="flex items-center gap-sm">
+<span class="font-h3 text-h3 text-on-surface dark:text-on-surface-variant">ChatScreenExporter</span>
+<span class="text-primary font-bold font-label-md text-label-md">V2.1</span>
+</div>
+<div class="flex items-center">
+<div class="flex items-center gap-xs">
+<button class="hover:bg-surface-container-highest dark:hover:bg-surface-dim transition-colors h-8 w-8 flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">remove</span>
+</button>
+<button class="hover:bg-surface-container-highest dark:hover:bg-surface-dim transition-colors h-8 w-8 flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">check_box_outline_blank</span>
+</button>
+<button class="hover:bg-error hover:text-on-error transition-colors h-8 w-8 flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<!-- Sidebar Navigation (SideNavBar) -->
+<aside class="bg-surface-container-low dark:bg-surface-container-lowest border-r border-outline-variant flex flex-col py-md gap-xs fixed left-0 top-8 h-full w-60 z-10">
+<div class="px-md mb-md">
+<h2 class="font-h2 text-h2 text-primary">Tools</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant">V1.0.4</p>
+</div>
+<nav class="flex flex-col">
+<button class="bg-surface-container-highest border-l-4 border-primary text-on-surface font-semibold flex items-center gap-sm px-md py-sm transition-all duration-150 ease-in-out">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Export Settings</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-container-high flex items-center gap-sm px-md py-sm transition-all duration-150 ease-in-out">
+<span class="material-symbols-outlined">chat</span>
+<span class="font-label-md text-label-md">Chat History</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-container-high flex items-center gap-sm px-md py-sm transition-all duration-150 ease-in-out">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md text-label-md">File Format</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-container-high flex items-center gap-sm px-md py-sm transition-all duration-150 ease-in-out">
+<span class="material-symbols-outlined">tune</span>
+<span class="font-label-md text-label-md">Preferences</span>
+</button>
+</nav>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-60 mt-0 mb-8 p-margin-page overflow-y-auto bg-background">
+<div class="max-w-5xl mx-auto space-y-lg">
+<!-- Header Info -->
+<div class="mb-gutter">
+<h1 class="font-h1 text-h1 text-on-surface">聊天记录导出工具</h1>
+<p class="text-on-surface-variant font-body-md text-body-md mt-xs">自动截屏、翻页、AI识别，并导出 TXT 聊天记录</p>
+</div>
+<!-- Settings Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-lg">
+<!-- Section 1: 人物信息 -->
+<section class="bg-surface border border-outline-variant p-md rounded windows-shadow space-y-md">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">person</span>
+<h3 class="font-h3 text-h3">人物信息</h3>
+</div>
+<div class="grid grid-cols-2 gap-md">
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant">我的名字</label>
+<input class="w-full bg-white border border-outline-variant px-sm py-xs font-body-sm text-body-sm input-focus-teal rounded" type="text" value="User"/>
+</div>
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant">对方名字</label>
+<input class="w-full bg-white border border-outline-variant px-sm py-xs font-body-sm text-body-sm input-focus-teal rounded" placeholder="好友昵称" type="text"/>
+</div>
+</div>
+<p class="text-on-secondary-fixed-variant font-label-sm text-label-sm bg-secondary-container/30 p-xs border-l-2 border-primary">
+                            💡 右侧气泡默认为我，左侧气泡默认为对方
+                        </p>
+</section>
+<!-- Section 2: 读取范围 -->
+<section class="bg-surface border border-outline-variant p-md rounded windows-shadow space-y-md">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">crop_free</span>
+<h3 class="font-h3 text-h3">读取范围</h3>
+</div>
+<div class="flex items-center gap-md border border-dashed border-outline p-md bg-surface-container/50 rounded">
+<div class="flex-1">
+<p class="text-on-surface-variant font-body-md text-body-md italic">尚未选择聊天区域</p>
+</div>
+<button class="bg-primary text-on-primary px-md py-xs font-label-md text-label-md rounded hover:opacity-90 transition-opacity flex items-center gap-xs h-8">
+<span class="material-symbols-outlined text-[18px]">select_window</span>
+                                框选聊天范围
+                            </button>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant italic">
+                            提示：只框选聊天消息列表，不要包含输入框或左侧会话列表
+                        </p>
+</section>
+<!-- Section 3: AI 识别设置 -->
+<section class="bg-surface border border-outline-variant p-md rounded windows-shadow space-y-md lg:col-span-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">psychology</span>
+<h3 class="font-h3 text-h3">AI 识别设置</h3>
+</div>
+<div class="flex items-center gap-sm">
+<span class="font-label-md text-label-md text-on-surface-variant">启用 AI 识别</span>
+<button class="w-10 h-5 bg-primary rounded-full relative transition-colors duration-200" onclick="this.classList.toggle('bg-primary'); this.classList.toggle('bg-outline-variant')">
+<div class="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full transition-transform translate-x-5"></div>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant">API 地址</label>
+<input class="w-full bg-white border border-outline-variant px-sm py-xs font-body-sm text-body-sm input-focus-teal rounded" placeholder="https://api.openai.com/v1" type="text"/>
+</div>
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant">模型名称</label>
+<input class="w-full bg-white border border-outline-variant px-sm py-xs font-body-sm text-body-sm input-focus-teal rounded" type="text" value="gpt-4o-mini"/>
+</div>
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant">API Key</label>
+<input class="w-full bg-white border border-outline-variant px-sm py-xs font-body-sm text-body-sm input-focus-teal rounded" type="password" value="sk-••••••••••••"/>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-md items-end">
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant">接口格式</label>
+<select class="w-full bg-white border border-outline-variant px-sm py-xs font-body-sm text-body-sm input-focus-teal rounded">
+<option>Chat Completions</option>
+<option>OpenAI Responses</option>
+</select>
+</div>
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant">AI 并发数</label>
+<div class="flex border border-outline-variant rounded overflow-hidden">
+<input class="w-full bg-white border-none px-sm py-xs font-body-sm text-body-sm input-focus-teal" type="number" value="2"/>
+<div class="flex flex-col border-l border-outline-variant">
+<button class="bg-surface-container-high hover:bg-surface-variant px-1 text-[10px]">▲</button>
+<button class="bg-surface-container-high hover:bg-surface-variant px-1 text-[10px] border-t border-outline-variant">▼</button>
+</div>
+</div>
+</div>
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant">AI 合并屏数</label>
+<input class="w-full bg-white border border-outline-variant px-sm py-xs font-body-sm text-body-sm input-focus-teal rounded" type="number" value="5"/>
+</div>
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant">上传宽度 (px)</label>
+<input class="w-full bg-white border border-outline-variant px-sm py-xs font-body-sm text-body-sm input-focus-teal rounded" type="number" value="1280"/>
+</div>
+</div>
+<div class="bg-error-container/20 border border-error/20 p-sm rounded flex items-start gap-sm">
+<span class="material-symbols-outlined text-error text-[20px]">warning</span>
+<p class="text-on-error-container font-label-sm text-label-sm">
+                                照片、表情包、文件会跳过，不写入 TXT
+                            </p>
+</div>
+</section>
+<!-- Section 4: 翻页与速度 -->
+<section class="bg-surface border border-outline-variant p-md rounded windows-shadow space-y-md">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">fast_forward</span>
+<h3 class="font-h3 text-h3">翻页与速度</h3>
+</div>
+<div class="space-y-md">
+<div class="flex flex-col gap-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant">翻页方式</label>
+<div class="flex bg-surface-container rounded p-xs gap-xs">
+<button class="flex-1 bg-white shadow-sm py-xs px-sm font-label-md text-label-md rounded text-primary font-bold">整屏翻页</button>
+<button class="flex-1 hover:bg-surface-container-high py-xs px-sm font-label-md text-label-md rounded text-on-surface-variant">滚轮滚动</button>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-md">
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant">速度模式</label>
+<select class="w-full bg-white border border-outline-variant px-sm py-xs font-body-sm text-body-sm input-focus-teal rounded">
+<option>稳定 (推荐)</option>
+<option>快速</option>
+<option>极速</option>
+</select>
+</div>
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant">防漏重叠 (px)</label>
+<input class="w-full bg-white border border-outline-variant px-sm py-xs font-body-sm text-body-sm input-focus-teal rounded" type="number" value="100"/>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-md">
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant">最多扫描屏数</label>
+<input class="w-full bg-white border border-outline-variant px-sm py-xs font-body-sm text-body-sm input-focus-teal rounded" type="number" value="999"/>
+</div>
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant">异常容错批次</label>
+<input class="w-full bg-white border border-outline-variant px-sm py-xs font-body-sm text-body-sm input-focus-teal rounded" type="number" value="3"/>
+</div>
+</div>
+</div>
+<p class="text-on-surface-variant font-label-sm text-label-sm italic mt-xs">
+                            💡 整屏翻页使用 PageUp/PageDown，速度最快
+                        </p>
+</section>
+<!-- Section 5: 保存位置 -->
+<section class="bg-surface border border-outline-variant p-md rounded windows-shadow space-y-md h-fit">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">folder_open</span>
+<h3 class="font-h3 text-h3">保存位置</h3>
+</div>
+<div class="space-y-md">
+<div class="flex items-center gap-sm">
+<div class="flex-1 bg-surface-container-high border border-outline-variant px-sm py-xs font-code text-code text-on-surface truncate rounded">
+                                    C:\Users\Desktop\ChatExports\2023-11-24\
+                                </div>
+<button class="bg-white border border-outline-variant px-md py-xs font-label-md text-label-md rounded hover:bg-surface-container-low transition-colors h-8">
+                                    选择保存位置
+                                </button>
+</div>
+<!-- Visual Preview Placeholder -->
+<div class="bg-surface-container-highest h-24 rounded border border-outline-variant relative overflow-hidden flex items-center justify-center">
+<div class="absolute inset-0 opacity-10 bg-grid-slate-100 [mask-image:linear-gradient(0deg,#fff,rgba(255,255,255,0.6))] dark:bg-grid-slate-700/25"></div>
+<div class="text-center z-10">
+<span class="material-symbols-outlined text-[32px] text-outline">description</span>
+<p class="font-label-sm text-label-sm text-outline uppercase tracking-widest mt-xs">Output Preview</p>
+</div>
+<img class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-30" data-alt="A clean, minimalist workspace background featuring a document icon and a digital grid pattern. The aesthetic is professional and corporate, with a light gray and deep teal color palette. High-key lighting creates a sharp, clear desktop application atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuABQ6J_NL6kG8fTtHDvSzspVWFojT2Wv7iQSO1f6VY7IafPTbxwL0WHCX4rkrOlDPaPExev9Tg_VQ4Y63PSOpC5swPeZppjbiRrPv5otNMi5yXEFnSo2SwDExOVss330G_QS3eVJfLEp_2CLCsPCLV4KDxCh95iKyu7W20nS2HwpJRobP9CebHr9B4RYUhChNBKtmUpl5wWVl0WjTY5BarC9hUHGBDf4acFSADesGe8sp-qjR-cs0VfIv7YlfKUud2aC0SwapSMzV2j"/>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+</div>
+<!-- Footer Component (Footer) -->
+<footer class="bg-surface-container dark:bg-surface-container-high border-t border-outline-variant fixed bottom-0 right-0 left-0 h-10 flex justify-between items-center px-lg w-full z-50">
+<div class="flex items-center gap-lg">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-primary">Ready</span>
+<div class="flex gap-md">
+<a class="text-on-secondary-fixed-variant font-label-sm text-label-sm hover:text-primary transition-colors cursor-pointer underline">Logs</a>
+<a class="text-on-secondary-fixed-variant font-label-sm text-label-sm hover:text-primary transition-colors cursor-pointer">Support</a>
+<a class="text-on-secondary-fixed-variant font-label-sm text-label-sm hover:text-primary transition-colors cursor-pointer">Documentation</a>
+</div>
+</div>
+<div class="flex items-center gap-sm">
+<button class="px-md py-1 border border-outline-variant bg-white font-label-md text-label-md hover:bg-surface-container-low transition-colors h-7 cursor-pointer">
+                取消
+            </button>
+<button class="px-md py-1 border border-outline-variant bg-white font-label-md text-label-md hover:bg-surface-container-low transition-colors h-7 cursor-pointer">
+                保存配置
+            </button>
+<button class="px-xl py-1 bg-primary text-on-primary font-label-md text-label-md font-bold hover:opacity-90 transition-opacity h-7 cursor-pointer">
+                开始导出
+            </button>
+</div>
+</footer>
+<script>
+        // Simple micro-interaction for numeric inputs
+        document.querySelectorAll('input[type="number"]').forEach(input => {
+            input.addEventListener('focus', () => input.select());
+        });
+
+        // Mock interaction for segmented controls
+        const segmentButtons = document.querySelectorAll('.flex.bg-surface-container button');
+        segmentButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const parent = this.parentElement;
+                parent.querySelectorAll('button').forEach(b => {
+                    b.classList.remove('bg-white', 'shadow-sm', 'text-primary', 'font-bold');
+                    b.classList.add('hover:bg-surface-container-high', 'text-on-surface-variant');
+                });
+                this.classList.add('bg-white', 'shadow-sm', 'text-primary', 'font-bold');
+                this.classList.remove('hover:bg-surface-container-high', 'text-on-surface-variant');
+            });
+        });
+    </script>
+</body></html>

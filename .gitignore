@@ -1,0 +1,42 @@
+# Local configuration and private runtime state
+config.json
+.env
+.env.*
+
+# Exported chat records and user data
+txt/
+exports/
+chat_export_*.txt
+历史备份/
+readme.txt
+
+# Packaged binaries and build output
+*.exe
+build/
+dist/
+
+# Bundled OCR language data
+tessdata/
+
+# Python caches and virtual environments
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak
+Thumbs.db
+desktop.ini
+*.lnk
+
+# Generated design archives and obsolete local helpers
+stitch/**/*.zip
+assets/make_app_icon.py

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ChatScreenExporter - 导出完成</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#edeef0",
+                        "tertiary-fixed": "#ffdcbf",
+                        "on-secondary-fixed": "#121c28",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-primary": "#6cd3f7",
+                        "outline-variant": "#bdc8ce",
+                        "on-tertiary-container": "#fffbff",
+                        "inverse-surface": "#2e3132",
+                        "tertiary-container": "#a86516",
+                        "on-tertiary-fixed-variant": "#6a3b00",
+                        "secondary-container": "#d6e0f1",
+                        "error-container": "#ffdad6",
+                        "surface-bright": "#f8f9fb",
+                        "surface-dim": "#d9dadc",
+                        "on-primary-fixed-variant": "#004e61",
+                        "surface-container-high": "#e7e8ea",
+                        "inverse-on-surface": "#f0f1f3",
+                        "primary": "#00647c",
+                        "secondary": "#555f6d",
+                        "on-background": "#191c1e",
+                        "surface-container-highest": "#e1e2e4",
+                        "surface-container-low": "#f3f4f6",
+                        "tertiary-fixed-dim": "#ffb873",
+                        "outline": "#6e797e",
+                        "on-secondary-fixed-variant": "#3e4755",
+                        "surface": "#f8f9fb",
+                        "on-surface-variant": "#3e484d",
+                        "secondary-fixed-dim": "#bdc7d8",
+                        "surface-variant": "#e1e2e4",
+                        "on-secondary-container": "#596372",
+                        "surface-tint": "#006780",
+                        "on-surface": "#191c1e",
+                        "tertiary": "#894e00",
+                        "on-primary-fixed": "#001f28",
+                        "on-error-container": "#93000a",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#007f9d",
+                        "on-tertiary-fixed": "#2d1600",
+                        "background": "#f8f9fb",
+                        "primary-fixed-dim": "#6cd3f7",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#fafdff",
+                        "primary-fixed": "#b7eaff",
+                        "on-error": "#ffffff",
+                        "secondary-fixed": "#d9e3f4",
+                        "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "margin-page": "24px",
+                        "base": "4px",
+                        "gutter": "12px",
+                        "sm": "8px",
+                        "lg": "24px",
+                        "xl": "32px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "code": ["JetBrains Mono"],
+                        "h2": ["Inter"],
+                        "h3": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "h1": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "code": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                        "h2": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "h3": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "label-sm": ["11px", {"lineHeight": "14px", "letterSpacing": "0.03em", "fontWeight": "500"}],
+                        "h1": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        body {
+            background-color: #F3F4F6;
+            color: #191C1E;
+            -webkit-font-smoothing: antialiased;
+        }
+        .utility-shadow {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .modal-overlay {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(1px);
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md overflow-hidden h-screen select-none cursor-default">
+<!-- TopAppBar -->
+<header class="bg-surface-container-low dark:bg-surface-container-lowest text-primary dark:text-primary-fixed-dim docked full-width top-0 border-b border-outline-variant flat no shadows flex justify-between items-center h-8 px-md w-full z-50">
+<div class="flex items-center gap-sm">
+<span class="font-h3 text-h3 text-on-surface dark:text-on-surface-variant">ChatScreenExporter</span>
+</div>
+<nav class="flex items-center">
+<div class="flex items-center h-8 px-xs hover:bg-surface-container-highest transition-colors cursor-default">
+<span class="material-symbols-outlined text-[18px]">remove</span>
+</div>
+<div class="flex items-center h-8 px-xs hover:bg-surface-container-highest transition-colors cursor-default">
+<span class="material-symbols-outlined text-[18px]">check_box_outline_blank</span>
+</div>
+<div class="flex items-center h-8 px-xs hover:bg-error hover:text-on-error transition-colors cursor-default">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</div>
+</nav>
+</header>
+<div class="flex h-[calc(100vh-64px)] mt-8">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-8 h-full w-60 bg-surface-container-low dark:bg-surface-container-lowest border-r border-outline-variant flex flex-col py-md gap-xs">
+<div class="px-md mb-md">
+<h2 class="font-h2 text-h2 text-primary">Tools</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant opacity-60">V1.0.4</p>
+</div>
+<nav class="flex flex-col">
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-high transition-all duration-150 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Export Settings</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm bg-surface-container-highest border-l-4 border-primary text-on-surface font-semibold transition-all duration-150 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">chat</span>
+<span>Chat History</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-high transition-all duration-150 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">description</span>
+<span>File Format</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-high transition-all duration-150 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">tune</span>
+<span>Preferences</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content Area (Background View) -->
+<main class="ml-60 flex-1 p-margin-page bg-background">
+<div class="grid grid-cols-12 gap-gutter">
+<div class="col-span-8 bg-surface-container-lowest border border-outline-variant p-md rounded-DEFAULT utility-shadow">
+<div class="flex items-center justify-between mb-md">
+<h3 class="font-h3 text-h3">导出队列</h3>
+<span class="bg-primary/10 text-primary px-sm py-xs rounded-full font-label-sm text-label-sm">就绪</span>
+</div>
+<div class="space-y-xs">
+<div class="h-8 border-b border-outline-variant flex items-center px-sm text-on-surface-variant">
+<span class="w-8">#</span>
+<span class="flex-1">任务名称</span>
+<span class="w-32">进度</span>
+<span class="w-24 text-right">状态</span>
+</div>
+<div class="h-10 hover:bg-surface-container-low flex items-center px-sm transition-colors">
+<span class="w-8 text-on-surface-variant">01</span>
+<span class="flex-1">WeChat_Export_20231024</span>
+<span class="w-32 h-2 bg-surface-container rounded-full overflow-hidden mr-md">
+<div class="bg-primary h-full w-full"></div>
+</span>
+<span class="w-24 text-right text-primary font-semibold">完成</span>
+</div>
+</div>
+</div>
+<div class="col-span-4 space-y-gutter">
+<div class="bg-surface-container-lowest border border-outline-variant p-md rounded-DEFAULT utility-shadow">
+<h3 class="font-h3 text-h3 mb-sm">资源占用</h3>
+<div class="h-[120px] bg-surface-container-low rounded-DEFAULT flex items-end justify-between p-sm gap-xs">
+<div class="bg-primary-container w-full h-[40%] rounded-t-xs"></div>
+<div class="bg-primary-container w-full h-[60%] rounded-t-xs"></div>
+<div class="bg-primary-container w-full h-[35%] rounded-t-xs"></div>
+<div class="bg-primary-container w-full h-[85%] rounded-t-xs"></div>
+<div class="bg-primary w-full h-[95%] rounded-t-xs"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Result Dialog Overlay -->
+<div class="fixed inset-0 z-[100] modal-overlay flex items-center justify-center">
+<div class="w-[480px] bg-surface-container-lowest border border-outline rounded-lg utility-shadow overflow-hidden flex flex-col">
+<!-- Modal Header -->
+<div class="h-10 px-md flex items-center justify-between bg-surface-container-low border-b border-outline-variant">
+<span class="font-label-md text-label-md font-semibold text-on-surface">导出完成</span>
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant cursor-pointer hover:text-error transition-colors">close</span>
+</div>
+<!-- Modal Content -->
+<div class="p-xl flex flex-col items-center text-center">
+<!-- Large Success Icon -->
+<div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-md">
+<span class="material-symbols-outlined text-[48px] text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h2 class="font-h2 text-h2 text-on-surface mb-xs">TXT 文件已保存</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-lg">数据提取与格式化流程已顺利结束</p>
+<!-- File Path Well -->
+<div class="w-full bg-surface-container rounded-DEFAULT p-md border border-outline-variant mb-lg text-left">
+<div class="flex items-center gap-sm mb-xs">
+<span class="material-symbols-outlined text-on-surface-variant text-[16px]">folder_open</span>
+<span class="font-label-sm text-label-sm text-on-secondary-fixed-variant">输出路径</span>
+</div>
+<code class="font-code text-code text-primary break-all block">C:\Users\Desktop\ChatExports\2023_10_27\Result_1280.txt</code>
+</div>
+<!-- Stats Row -->
+<div class="w-full grid grid-cols-3 divide-x divide-outline-variant border-t border-b border-outline-variant py-md mb-xl">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">扫描屏数</span>
+<span class="font-h3 text-h3 text-on-surface">400</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">导出消息</span>
+<span class="font-h3 text-h3 text-on-surface">1280</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">异常批次</span>
+<span class="font-h3 text-h3 text-error">3</span>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex items-center gap-gutter w-full">
+<button class="flex-1 h-8 bg-primary text-on-primary font-label-md text-label-md rounded-DEFAULT hover:bg-primary-container transition-colors utility-shadow flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">description</span>
+                        打开 TXT
+                    </button>
+<button class="flex-1 h-8 bg-surface-container-lowest border border-outline-variant text-on-surface font-label-md text-label-md rounded-DEFAULT hover:bg-surface-container transition-colors flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">folder</span>
+                        打开文件夹
+                    </button>
+<button class="w-20 h-8 border border-transparent text-on-surface-variant hover:text-on-surface font-label-md text-label-md rounded-DEFAULT transition-colors">
+                        关闭
+                    </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="fixed bottom-0 right-0 left-0 h-8 bg-surface-container dark:bg-surface-container-high border-t border-outline-variant flex justify-between items-center px-lg w-full z-50">
+<div class="flex items-center gap-md">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-primary">ChatScreenExporter</span>
+<span class="w-[1px] h-3 bg-outline-variant"></span>
+<span class="font-label-sm text-label-sm text-on-secondary-fixed-variant">Ready</span>
+</div>
+<div class="flex items-center gap-lg">
+<a class="font-label-sm text-label-sm text-on-secondary-fixed-variant hover:text-primary transition-colors cursor-pointer" href="#">Logs</a>
+<a class="font-label-sm text-label-sm text-on-secondary-fixed-variant hover:text-primary transition-colors cursor-pointer" href="#">Support</a>
+<a class="font-label-sm text-label-sm text-on-secondary-fixed-variant hover:text-primary transition-colors cursor-pointer" href="#">Documentation</a>
+</div>
+</footer>
+<script>
+        // Micro-interaction: Close modal (Simulation)
+        document.querySelector('.modal-overlay .material-symbols-outlined:last-of-type').addEventListener('click', () => {
+            document.querySelector('.modal-overlay').style.display = 'none';
+        });
+        
+        const closeBtn = document.querySelectorAll('button')[2];
+        if(closeBtn) {
+            closeBtn.addEventListener('click', () => {
+                document.querySelector('.modal-overlay').style.display = 'none';
+            });
+        }
+    </script>
+</body></html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ChatScreenExporter - Exporting</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+        }
+        body {
+            background-color: #F3F4F6;
+            font-family: 'Inter', sans-serif;
+        }
+        .windows-blur {
+            backdrop-filter: blur(8px);
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        .progress-shimmer {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary": "#ffffff",
+                      "surface-container": "#edeef0",
+                      "tertiary-fixed": "#ffdcbf",
+                      "on-secondary-fixed": "#121c28",
+                      "surface-container-lowest": "#ffffff",
+                      "inverse-primary": "#6cd3f7",
+                      "outline-variant": "#bdc8ce",
+                      "on-tertiary-container": "#fffbff",
+                      "inverse-surface": "#2e3132",
+                      "tertiary-container": "#a86516",
+                      "on-tertiary-fixed-variant": "#6a3b00",
+                      "secondary-container": "#d6e0f1",
+                      "error-container": "#ffdad6",
+                      "surface-bright": "#f8f9fb",
+                      "surface-dim": "#d9dadc",
+                      "on-primary-fixed-variant": "#004e61",
+                      "surface-container-high": "#e7e8ea",
+                      "inverse-on-surface": "#f0f1f3",
+                      "primary": "#00647c",
+                      "secondary": "#555f6d",
+                      "on-background": "#191c1e",
+                      "surface-container-highest": "#e1e2e4",
+                      "surface-container-low": "#f3f4f6",
+                      "tertiary-fixed-dim": "#ffb873",
+                      "outline": "#6e797e",
+                      "on-secondary-fixed-variant": "#3e4755",
+                      "surface": "#f8f9fb",
+                      "on-surface-variant": "#3e484d",
+                      "secondary-fixed-dim": "#bdc7d8",
+                      "surface-variant": "#e1e2e4",
+                      "on-secondary-container": "#596372",
+                      "surface-tint": "#006780",
+                      "on-surface": "#191c1e",
+                      "tertiary": "#894e00",
+                      "on-primary-fixed": "#001f28",
+                      "on-error-container": "#93000a",
+                      "on-primary": "#ffffff",
+                      "primary-container": "#007f9d",
+                      "on-tertiary-fixed": "#2d1600",
+                      "background": "#f8f9fb",
+                      "primary-fixed-dim": "#6cd3f7",
+                      "on-secondary": "#ffffff",
+                      "on-primary-container": "#fafdff",
+                      "primary-fixed": "#b7eaff",
+                      "on-error": "#ffffff",
+                      "secondary-fixed": "#d9e3f4",
+                      "error": "#ba1a1a"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xs": "4px",
+                      "margin-page": "24px",
+                      "base": "4px",
+                      "gutter": "12px",
+                      "sm": "8px",
+                      "lg": "24px",
+                      "xl": "32px",
+                      "md": "16px"
+              },
+              "fontFamily": {
+                      "label-md": ["Inter"],
+                      "code": ["jetbrainsMono"],
+                      "h2": ["Inter"],
+                      "h3": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "h1": ["Inter"],
+                      "body-sm": ["Inter"],
+                      "body-md": ["Inter"]
+              },
+              "fontSize": {
+                      "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                      "code": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                      "h2": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "h3": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                      "label-sm": ["11px", {"lineHeight": "14px", "letterSpacing": "0.03em", "fontWeight": "500"}],
+                      "h1": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+      </script>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-surface-container-low">
+<!-- TopAppBar Integration (Fixed top) -->
+<header class="fixed top-0 left-0 w-full h-8 flex justify-between items-center px-md bg-surface-container-low border-b border-outline-variant z-50 select-none cursor-default">
+<div class="flex items-center gap-sm">
+<span class="font-h3 text-h3 text-on-surface">ChatScreenExporter</span>
+</div>
+<div class="flex items-center">
+<button class="w-8 h-8 flex items-center justify-center hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-[16px]">remove</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-[16px]">check_box_outline_blank</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center hover:bg-error hover:text-on-error transition-colors">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+</header>
+<!-- Sidebar Simulation (Locked state for focused task) -->
+<nav class="fixed left-0 top-8 h-full w-60 flex flex-col py-md gap-xs bg-surface-container-low border-r border-outline-variant select-none opacity-50 pointer-events-none">
+<div class="px-md mb-sm">
+<h2 class="font-h2 text-h2 text-primary">Tools</h2>
+<p class="text-label-sm font-label-sm text-on-surface-variant">V1.0.4</p>
+</div>
+<div class="flex flex-col gap-xs">
+<div class="flex items-center gap-md px-md py-sm text-on-surface-variant">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Export Settings</span>
+</div>
+<div class="flex items-center gap-md px-md py-sm bg-surface-container-highest border-l-4 border-primary text-on-surface font-semibold">
+<span class="material-symbols-outlined">chat</span>
+<span class="font-label-md text-label-md">Chat History</span>
+</div>
+<div class="flex items-center gap-md px-md py-sm text-on-surface-variant">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md text-label-md">File Format</span>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas (The Progress Dialog) -->
+<main class="ml-60 mt-8 w-full flex items-center justify-center p-xl">
+<div class="w-[420px] bg-surface-container-lowest border border-outline-variant rounded shadow-md overflow-hidden animate-in fade-in zoom-in duration-300">
+<!-- Dialog Header -->
+<div class="px-md py-sm bg-surface-container-low border-b border-outline-variant flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary text-[18px]">sync</span>
+<span class="font-h3 text-h3 text-on-surface">正在导出</span>
+</div>
+</div>
+<!-- Dialog Body -->
+<div class="p-md space-y-md">
+<!-- Status Row -->
+<div class="space-y-xs">
+<div class="flex justify-between items-end">
+<span class="font-body-md text-body-md text-on-surface font-medium">正在快速截屏：第 120/400 屏</span>
+<span class="font-code text-code text-primary font-bold">30%</span>
+</div>
+<!-- Progress Bar -->
+<div class="h-2 w-full bg-secondary-container rounded-full overflow-hidden">
+<div class="h-full w-[30%] bg-primary relative">
+<div class="absolute inset-0 progress-shimmer"></div>
+</div>
+</div>
+</div>
+<!-- Metrics Row -->
+<div class="flex items-start gap-md p-sm bg-surface-container rounded-lg border border-outline-variant/30">
+<div class="flex-1 space-y-xs">
+<div class="flex items-center gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">analytics</span>
+<span class="font-label-md text-label-md">实时统计</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-secondary-container">
+                            已识别 <span class="font-semibold text-primary">356</span> 条消息，异常批次 <span class="font-semibold text-error">2</span>
+</p>
+</div>
+</div>
+<!-- Warning Message -->
+<div class="flex items-center gap-xs py-xs text-on-secondary-fixed-variant">
+<span class="material-symbols-outlined text-[14px]">info</span>
+<span class="font-label-sm text-label-sm">停止后会保留已识别内容</span>
+</div>
+</div>
+<!-- Dialog Actions -->
+<div class="px-md py-sm bg-surface-container-low flex justify-end gap-sm">
+<button class="h-8 px-md flex items-center gap-xs font-label-md text-label-md bg-surface-container-lowest border border-outline-variant hover:bg-surface-container-high transition-colors text-on-surface rounded">
+<span class="material-symbols-outlined text-[16px]">pause</span>
+                    暂停
+                </button>
+<button class="h-8 px-md flex items-center gap-xs font-label-md text-label-md bg-surface-container-lowest border border-outline-variant hover:bg-surface-container-high transition-colors text-on-surface rounded opacity-50 cursor-not-allowed">
+<span class="material-symbols-outlined text-[16px]">play_arrow</span>
+                    继续
+                </button>
+<button class="h-8 px-md flex items-center gap-xs font-label-md text-label-md bg-primary text-on-primary hover:bg-primary-container transition-colors rounded">
+<span class="material-symbols-outlined text-[16px]">save</span>
+                    停止并保存
+                </button>
+</div>
+</div>
+</main>
+<!-- Footer Integration -->
+<footer class="fixed bottom-0 right-0 left-0 h-8 flex justify-between items-center px-lg bg-surface-container border-t border-outline-variant z-50">
+<div class="flex items-center gap-md">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-secondary-fixed-variant">READY</span>
+<div class="flex gap-md">
+<a class="font-label-sm text-label-sm text-on-secondary-fixed-variant hover:text-primary transition-colors" href="#">Logs</a>
+<a class="font-label-sm text-label-sm text-on-secondary-fixed-variant hover:text-primary transition-colors" href="#">Support</a>
+</div>
+</div>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px] text-primary">check_circle</span>
+<span class="font-label-sm text-label-sm text-on-secondary-fixed-variant">System Optimal</span>
+</div>
+</footer>
+<!-- Interactive Layer for UI responsiveness -->
+<script>
+        // Simple progress simulation for visual effect
+        let progress = 30;
+        const bar = document.querySelector('.bg-primary');
+        const text = document.querySelector('.font-code');
+        
+        setInterval(() => {
+            if (progress < 100) {
+                progress += 0.05;
+                bar.style.width = progress + '%';
+                text.innerText = Math.floor(progress) + '%';
+            }
+        }, 500);
+
+        // Interaction for buttons
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('mousedown', () => {
+                if(!btn.classList.contains('cursor-not-allowed')) {
+                    btn.style.transform = 'scale(0.98)';
+                }
+            });
+            btn.addEventListener('mouseup', () => {
+                btn.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body></html>
