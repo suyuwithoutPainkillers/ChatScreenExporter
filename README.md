@@ -29,6 +29,10 @@
 
 ![导出成果示例](assets/export_result_showcase.png)
 
+软件启动界面如下：
+
+![软件界面截图](assets/app_interface_screenshot.png)
+
 ## 能记录什么
 
 - 时间：来自聊天窗口中实际显示的时间标记。
