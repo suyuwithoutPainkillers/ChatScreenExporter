@@ -44,8 +44,12 @@ foreach ($release in $releases) {
     $assetPath = $matches[0].FullName
     $assetName = $matches[0].Name
 
+    $oldErrorActionPreference = $ErrorActionPreference
+    $ErrorActionPreference = "SilentlyContinue"
     gh release view $release.Tag --repo $Repo *> $null
-    if ($LASTEXITCODE -eq 0) {
+    $viewExitCode = $LASTEXITCODE
+    $ErrorActionPreference = $oldErrorActionPreference
+    if ($viewExitCode -eq 0) {
         Write-Host "Skip existing release $($release.Tag)" -ForegroundColor DarkYellow
         continue
     }
